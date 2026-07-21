@@ -1,0 +1,31 @@
+# --- Python / Backend (trata_backend) ---
+trata_backend/Trataenv/
+trata_backend/__pycache__/
+trata_backend/routes/__pycache__/
+trata_backend/services/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# --- Node / Frontend (trata_frontend) ---
+trata_frontend/node_modules/
+trata_frontend/build/
+trata_frontend/.next/
+trata_frontend/dist/
+trata_frontend/.env
+trata_frontend/.env.local
+
+# --- Large Model / Binary Files (Optional) ---
+# Uncomment the line below if your model files are too large for GitHub LFS limits
+# trata_backend/models/*.keras
+# trata_backend/models/*.joblib
+# trata_backend/models/*.yarc
+
+# --- System & IDE Files ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

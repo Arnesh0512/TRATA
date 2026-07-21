@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081426" />
+    <meta name="google-signin-client_id" content="667539636431-im6uicpgbjpon632vpp2osjc8pg6t1lg.apps.googleusercontent.com" />
+    <title>TRATA | Threat Response and Tactical Assessment</title>
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="/src/styles.css?v=8" />
+    <link rel="icon" type="image/png" href="/public/logo.png" />
+  </head>
+  <body class="dark">
+    <div id="loader" class="loader">
+      <div class="loader-grid"></div>
+      <div class="loader-core">
+        <span></span>
+        <strong>TRATA</strong>
+        <small>Threat Response and Tactical Assessment</small>
+      </div>
+    </div>
+
+    <!-- Connection Loading State Overlay -->
+    <div id="connectionLoader" class="loader" style="opacity: 0; visibility: hidden; z-index: 2000;">
+      <div class="loader-grid"></div>
+      <div class="loader-core" style="width: 280px; height: 280px;">
+        <span></span>
+        <strong>CONNECTING</strong>
+        <small style="max-width: 210px; margin-top: -60px;">Waiting for local application initiating for connection...</small>
+      </div>
+    </div>
+
+    <div class="global-hero-bg"><canvas id="heroGraph"></canvas></div>
+
+    <div class="app">
+      <aside class="sidebar">
+        <a class="brand" href="#home" data-route="home">
+          <span class="brand-mark"><img src="/public/logo.png" alt="TRATA logo" /></span>
+          <span><b>TRATA</b><br /><small>Cyber Resilience</small></span>
+        </a>
+        <nav class="nav">
+          <a href="#dashboard" data-route="dashboard">Dashboard</a>
+          <a href="#packet-capture" data-route="packet-capture">Packet Capture</a>
+          <a href="#logs" data-route="logs">Logs</a>
+          <a href="#files" data-route="files">Files</a>
+          <a href="#behaviour" data-route="behaviour">User System Behaviour</a>
+          <a href="#proxy" data-route="proxy">Proxy</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="status-line"><span class="pulse"></span><span>Operational fabric active</span></div>
+          <a class="profile-card" href="#profile" data-route="profile">
+            <span class="avatar" id="profileInitials">AG</span>
+            <span><b id="profileNameMini">Arnesh Kumar Gupta</b><small id="profileRoleMini">Developer</small></span>
+          </a>
+        </div>
+      </aside>
+
+      <main id="top">
+        <section class="page active" id="page-home" data-page="home">
+          <header class="landing">
+            <div class="landing-copy">
+              <span class="kicker">Threat Response and Tactical Assessment</span>
+              <h1>Cyber resilience command console for critical infrastructure.</h1>
+              <p>Correlated endpoint, packet, log, file, CVE, and proxy intelligence for critical infrastructure operations.</p>
+              
+              <div class="panel oauth-panel" style="margin-top: 24px; max-width: 420px;">
+                <h3>Operator Access</h3>
+                <p style="font-size: 0.88rem; margin-bottom: 12px;">Create an account to unlock live operational feeds and control matrix.</p>
+                <button id="homeGoogleLogin" class="google-button">Create Account</button>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <div class="ring"><b id="heroScore">88</b><small>Resilience score</small></div>
+              <div class="metric-list">
+                <p><b id="windowRange">10 min</b><span>time window</span></p>
+                <p><b id="nextWindow">calculating</b><span>next update</span></p>
+                <p><b id="monitoredAssets">42</b><span>assets monitored</span></p>
+              </div>
+            </div>
+          </header>
+        </section>
+
+        <section class="page" id="page-dashboard" data-page="dashboard">
+          <section class="content">
+            <div class="page-head">
+              <div><span class="kicker">Dashboard</span><h2>Operational posture</h2></div>
+            </div>
+            <div class="score-grid">
+              <article class="score-card"><span>YARA confidence</span><strong>94</strong><div class="bar"><i style="width:94%"></i></div><small>No malicious file match in the current hour.</small></article>
+              <article class="score-card"><span>Sigma confidence</span><strong>96</strong><div class="bar"><i style="width:96%"></i></div><small>Log behaviour remains inside baseline.</small></article>
+              <article class="score-card"><span>CVE pressure</span><strong>31</strong><div class="bar calm"><i style="width:31%"></i></div><small>No immediate exploit overlap in the active window.</small></article>
+              <article class="score-card"><span>Proxy hygiene</span><strong id="proxyCount">4</strong><div class="bar"><i style="width:78%"></i></div><small>Allowlist and denylist policy is consistent.</small></article>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="panel">
+                <div class="panel-head"><h3>Network traffic timeline</h3><span id="timelineLabel">Last 1 hour</span></div>
+                <div id="trafficChart" class="traffic-chart"></div>
+              </article>
+              <article class="panel">
+                <div class="panel-head"><h3>Realtime data</h3></div>
+                <div id="realtimeData" class="realtime-data"></div>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="page-packet-capture" data-page="packet-capture">
+          <section class="content">
+            <div class="page-head"><div><span class="kicker">Packet Capture</span><h2>Packet capture</h2></div><input id="packetSearch" class="search" placeholder="Search timestamp, verdict, event" /></div>
+            <div class="panel table-panel"><table><thead id="packetHead"></thead><tbody id="packetBody"></tbody></table></div>
+            <div id="packetDetail" class="detail-section"></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-logs" data-page="logs">
+          <section class="content">
+            <div class="page-head"><div><span class="kicker">Logs</span><h2>Log history</h2></div><input id="logSearch" class="search" placeholder="Search timestamp, verdict, event" /></div>
+            <div class="panel table-panel"><table><thead id="logHead"></thead><tbody id="logBody"></tbody></table></div>
+            <div id="logDetail" class="detail-section"></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-files" data-page="files">
+          <section class="content">
+            <div class="page-head"><div><span class="kicker">Files</span><h2>File history</h2></div><input id="fileSearch" class="search" placeholder="Search file event or location" /></div>
+            <div class="panel table-panel"><table><thead id="fileHead"></thead><tbody id="fileBody"></tbody></table></div>
+            <div id="fileDetail" class="detail-section"></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-behaviour" data-page="behaviour">
+          <section class="content">
+            <div class="page-head"><div><span class="kicker">Behaviour</span><h2>User system behaviour</h2></div><span id="graphState" class="state-pill">Normal operations</span></div>
+            <div class="panel graph-panel">
+              <canvas id="behaviourGraph"></canvas>
+              <div class="graph-legend"><span><i class="dot normal"></i>normal edge</span><span><i class="dot alert"></i>suspicious edge</span></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="page-proxy" data-page="proxy">
+          <section class="content">
+            <div class="page-head">
+              <div><span class="kicker">Proxy</span><h2>Proxy policy</h2></div>
+              <button id="addProxyButton" class="primary-action">+ Add blocked IP</button>
+            </div>
+            <form id="proxyForm" class="panel add-proxy">
+              <input id="proxyIp" placeholder="IP address" />
+              <input id="proxyReason" placeholder="Reason" />
+              <button class="primary-action">Block IP</button>
+            </form>
+            <div id="proxyList" class="proxy-list"></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-profile" data-page="profile">
+          <section class="content profile-page">
+            <div class="page-head"><div><span class="kicker">Profile</span><h2>User profile</h2></div><span id="oauthState" class="state-pill">Sign in required</span></div>
+            <div id="oauthPanel" class="panel oauth-panel">
+              <h3>Create Account</h3>
+              <p>Connect your operator identity to access collector pairing and organization controls.</p>
+              <button id="googleLogin" class="google-button">Create Account</button>
+              <div class="divider"><span>or</span></div>
+              <div class="manual-login">
+                <input id="manualUsername" placeholder="Username" />
+                <input id="manualPassword" type="password" placeholder="Password" />
+                <button id="manualLogin" class="primary-action">Create Account</button>
+              </div>
+            </div>
+            <div id="profileData" class="profile-data"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <button id="themeToggle" class="text-button global-theme-toggle">Light mode</button>
+
+    <section id="chatWidget" class="chat-widget">
+      <button id="chatToggle" class="chat-toggle">Analyst</button>
+      <div id="chatPanel" class="chat-panel">
+        <div id="chatLog" class="chat-log"></div>
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" placeholder="Ask about current posture" />
+          <button>Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Details Collection Modal -->
+    <div id="detailsModal" class="auth-modal-overlay" style="display:none;">
+      <div class="auth-modal-card">
+        <h3>Enter Profile Details</h3>
+        <p>Please provide your operational details to proceed.</p>
+        <form id="detailsForm" class="auth-modal-form">
+          <input id="inputName" placeholder="Full Name" required />
+          <input id="inputEmail" type="email" placeholder="Email Address" required />
+          <input id="inputOrg" placeholder="Organization" required />
+          <input id="inputRole" placeholder="Role / Designation" required />
+          <button type="submit" class="primary-action">Submit & Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- API Key Generation Modal -->
+    <div id="apiKeyModal" class="auth-modal-overlay" style="display:none;">
+      <div class="auth-modal-card">
+        <h3>Generate API Key</h3>
+        <p>Generate your secure session access key for collector pairing.</p>
+        <div class="api-key-box">
+          <code id="generatedApiKeyDisplay">Click generate to create key</code>
+        </div>
+        <div class="modal-actions">
+          <button id="triggerGenKey" class="text-button">Generate key</button>
+          <button id="copyGenKey" class="text-button" style="display:none;">Copy key</button>
+          <button id="finishApiKey" class="primary-action" disabled>Done & Enter Console</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/app.js?v=8"></script>
+  </body>
+</html>
