@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: trata-backend
+    runtime: python
+    pythonVersion: "3.11.10"
