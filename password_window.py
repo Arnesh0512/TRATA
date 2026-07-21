@@ -102,7 +102,7 @@ class PasswordWindow(tk.Tk):
         existing_password = load_local_config().get(self.password_key, "")
         if self.password_var.get() == existing_password:
             self.destroy()
-            from TRATA.system_info_window import SystemInfoWindow
+            from system_info_window import SystemInfoWindow
             window = SystemInfoWindow(api_key=self.api_key, agent_config=self.agent_config)
             window.mainloop()
         else:
@@ -123,7 +123,7 @@ class PasswordWindow(tk.Tk):
         save_local_config({self.password_key: password})
         messagebox.showinfo("Saved", "Password saved successfully.")
         self.destroy()
-        from TRATA.system_info_window import SystemInfoWindow
+        from system_info_window import SystemInfoWindow
         window = SystemInfoWindow(api_key=self.api_key, agent_config=self.agent_config)
         window.mainloop()
 
@@ -137,7 +137,7 @@ class PasswordWindow(tk.Tk):
 
         save_local_config({"api_key": None, "org_id": None, "org_name": None, "agent_id": None, "permissions": None, self.password_key: None})
         self.destroy()
-        from TRATA.apikey_window import ApiKeyWindow
+        from apikey_window import ApiKeyWindow
 
         def on_success(api_key, agent_config):
             pw = PasswordWindow(api_key=api_key, agent_config=agent_config)

@@ -7,8 +7,8 @@ from tkinter import ttk, messagebox
 import urllib.request
 import urllib.error
 
-from TRATA.block_window import BlockWindow
-from TRATA.password_window import PasswordWindow
+from block_window import BlockWindow
+from password_window import PasswordWindow
 
 # CONFIG.
 BASE_URL = "http://127.0.0.1:5000"
