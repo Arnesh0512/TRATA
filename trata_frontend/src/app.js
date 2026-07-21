@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://trata-backend-service.internal.net/api/v1";
+const API_BASE_URL = "https://trata-production.up.railway.app/";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];

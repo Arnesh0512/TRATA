@@ -11,7 +11,7 @@ from block_window import BlockWindow
 from password_window import PasswordWindow
 
 # CONFIG.
-BASE_URL = "http://127.0.0.1:5000"
+BASE_URL = "https://trata-production.up.railway.app/"
 
 CONFIG_DIR = os.path.join(os.path.expanduser("~"), ".cyber_resilience")
 CONFIG_PATH = os.path.join(CONFIG_DIR, "config.json")
