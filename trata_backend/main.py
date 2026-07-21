@@ -24,9 +24,7 @@ app.add_middleware(
 
 
 
-app.include_router(auth.router, prefix="/auth", tags=["Auth"])
-app.include_router(profile.router, prefix="/profile", tags=["Profile"])
-app.include_router(rag.router, prefix="/rag", tags=["RAG Engine"])
+
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 app.include_router(profile.router, prefix="/profile", tags=["Profile"])
 app.include_router(rag.router, prefix="/rag", tags=["RAG Engine"])
