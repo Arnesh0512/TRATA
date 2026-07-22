@@ -72,7 +72,7 @@ class SystemInfoWindow(tk.Tk):
 
         self.withdraw()
         self.tk.call("tk", "scaling", WINDOW_SCALE)
-        self.title("Cyber Resilience Agent — System Info")
+        self.title("TRATA Agent — System Info")
         center_window(self, 650, 390)
         self.resizable(False, False)
         self.deiconify()

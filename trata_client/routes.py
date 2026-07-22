@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.get("/")
 def home():
-    return jsonify({"message": "Cyber Resilience backend is running"})
+    return jsonify({"message": "TRATA backend is running"})
 
 
 VALID_API_KEYS = ["demo-key", "trata_live_8K9X_Q2N4_P7RM"]

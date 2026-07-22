@@ -52,7 +52,7 @@ class PasswordWindow(tk.Tk):
 
         self.withdraw()
         self.tk.call("tk", "scaling", WINDOW_SCALE)
-        self.title("Cyber Resilience Agent — Verify Identity")
+        self.title("TRATA Agent — Verify Identity")
         center_window(self, 560, 330)
         self.resizable(False, False)
         self.deiconify()

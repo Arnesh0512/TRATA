@@ -104,7 +104,7 @@ class ApiKeyWindow(tk.Tk):
 
         self.withdraw()
         self.tk.call("tk", "scaling", WINDOW_SCALE)
-        self.title("Cyber Resilience Agent — Setup")
+        self.title("TRATA Agent — Setup")
         center_window(self, 650, 390)
         self.resizable(False, False)
         self.deiconify()
@@ -121,7 +121,7 @@ class ApiKeyWindow(tk.Tk):
         subtitle = ttk.Label(
             self,
             text="Enter the API key issued for this deployment to link\n"
-                 "this agent with the Cyber Resilience backend.",
+                 "this agent with the TRATA backend.",
             foreground="#555555",
             justify="left",
             wraplength=400,
