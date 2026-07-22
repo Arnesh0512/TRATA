@@ -290,10 +290,10 @@ class SystemInfoWindow(tk.Tk):
     def _go_to_api_key_window(self):
         save_local_config({"api_key": None, "org_id": None, "org_name": None, "agent_id": None, "permissions": None})
         self.destroy()
-        from apikey_window import ApiKeyWindow
+        from trata_client.apikey_window import ApiKeyWindow
 
         def on_success(api_key, agent_config):
-            from password_window import PasswordWindow
+            from trata_client.password_window import PasswordWindow
             pw = PasswordWindow(api_key=api_key, agent_config=agent_config)
             pw.mainloop()
 
